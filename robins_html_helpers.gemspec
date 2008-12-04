@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{robins_html_helpers}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Spainhour"]
@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{HTML stuff I use frequently.}
   s.email = %q{robin@robinspainhour.com}
   s.extra_rdoc_files = ["lib/robins_html_helpers.rb", "README.rdoc"]
-  s.files = ["robinsp-robins_html_helpers.gemspec", "robins_html_helpers.gemspec", "Rakefile", "Manifest", "lib/robins_html_helpers.rb", "README.rdoc"]
+  s.files = ["robins_html_helpers.gemspec", "Rakefile", "Manifest", "lib/robins_html_helpers.rb", "README.rdoc"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/robinsp/robins_html_helpers}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Robins_html_helpers", "--main", "README.rdoc"]
