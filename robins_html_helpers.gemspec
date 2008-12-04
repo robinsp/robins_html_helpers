@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{HTML stuff I use frequently.}
   s.email = %q{robin@robinspainhour.com}
   s.extra_rdoc_files = ["lib/robins_html_helpers.rb", "README.rdoc"]
-  s.files = ["Rakefile", "Manifest", "lib/robins_html_helpers.rb", "README.rdoc", "robins_html_helpers.gemspec"]
+  s.files = ["robinsp-robins_html_helpers.gemspec", "robins_html_helpers.gemspec", "Rakefile", "Manifest", "lib/robins_html_helpers.rb", "README.rdoc"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/robinsp/robins_html_helpers}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Robins_html_helpers", "--main", "README.rdoc"]
