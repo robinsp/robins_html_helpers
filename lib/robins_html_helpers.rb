@@ -27,7 +27,7 @@ module RobinsHtmlHelpers
         content_tag(:div, :class => options[:bottom_right_class]) do 
           content_tag(:div, :class => options[:top_left_class]) do
             content_tag(:div, :class => options[:inner_class], :id => options[:inner_id]) do
-              capture(&block)
+              capture(&block) if block.present?
             end
           end
           
