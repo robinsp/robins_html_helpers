@@ -14,6 +14,7 @@ Echoe.new('robins_html_helpers', '0.1.2') do |p|
   p.email          = "robin@robinspainhour.com"
   p.ignore_pattern = ["tmp/*", "script/*", ".project"]
   p.development_dependencies = []
+  p.runtime_dependencies = []
 end
 
 Dir["#{File.dirname(__FILE__)}/tasks/*.rake"].sort.each { |ext| load ext }

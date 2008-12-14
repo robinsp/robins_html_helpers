@@ -3,10 +3,10 @@ module RobinsHtmlHelpers
   # TODO: Document the options argument
   def boxed_content(options = {},  &block)
     # Default class names
-    options[:bottom_left_class] ||= 'box_bottom_left'
-    options[:bottom_right_class] ||= 'box_bottom_right'
-    options[:top_left_class] ||= 'box_top_left'
-    options[:top_right_class] ||= 'box_top_right'
+    options[:bottom_left_class]   ||= 'box_bottom_left'
+    options[:bottom_right_class]  ||= 'box_bottom_right'
+    options[:top_left_class]      ||= 'box_top_left'
+    options[:top_right_class]     ||= 'box_top_right'
     
     if options[:inner_class]
       options[:inner_class] = options[:inner_class] + " " + options[:top_right_class]
