@@ -1,18 +1,12 @@
 require 'rubygems'
 
-#RAILS_ENV = 'test'
-
-
-
 require 'actionpack'
-require 'action_view'
-require 'activeresource'
-require 'activesupport'
 require 'action_controller'
 
 
 class ApplicationController < ActionController::Base
-  
+  # rspec-rails seems to need this. 
+  # I suppose it triggers a whole lot of loading, but I'm not sure of exactly what...  
 end
 
 require 'action_controller/test_process'
