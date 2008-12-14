@@ -1,6 +1,34 @@
 module RobinsHtmlHelpers
-  
-  # TODO: Document the options argument
+
+  # Wraps the content of its enclosed block in four divs that can hold corner images 
+  # to create a rounded corner effect on a web page. 
+  #
+  # ==== Example
+  #
+  #   <% boxed_content do %>
+  #     <p>Wrap me!</p>
+  #   <% end %>
+  #
+  # Produces this HTML:
+  #
+  #   <div class="box_bottom_left">
+  #     <div class="box_bottom_right">
+  #       <div class="box_top_left">
+  #         <div class="box_top_right"> 
+  #           <p>Wrap me!</p>
+  #         </div>
+  #       </div>
+  #     </div>
+  #   </div>
+  #
+  #
+  # The optional hash argument can be used to customize the classes and ids of the outermost 
+  # and innermost divs:
+  #
+  # * <tt>:outer_class</tt> - CSS class of the outer div. Defaults to <tt>box_bottom_left</tt>
+  # * <tt>:inner_class</tt> - CSS class of the inner div. Defaults to <tt>box_top_right</tt>
+  # * <tt>:outer_id</tt> - HTML id of the outer div. (Not set by default)
+  # * <tt>:inner_id</tt> - HTML id of the inner div. (Not set by default)
   def boxed_content(options = {},  &block)
     # Default class names
     options[:bottom_left_class]   ||= 'box_bottom_left'
