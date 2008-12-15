@@ -1,1 +1,20 @@
-# Helpers for HTML stuff I use frequently.
+
+# =Robin's HTML Helpers
+# Some of the helpers I use frequently when working on Rails views.
+# 
+# === Install
+# 
+# Add GitHub as a gem source repo if you haven't already done so:
+#     $ gem sources -a http://gems.github.com
+# 
+# Install this gem:    
+#     $ sudo gem install robinsp-robins_html_helpers
+#
+# === Rails
+# If you want to configure your Rails app to required this gem you can add something
+# like this to the config block in environment.rb:
+#       config.gem 'robinsp-robins_html_helpers', 
+#                  :version => '>=0.1.2',
+#                  :lib => 'robins_html_helpers', 
+#                  :source => 'http://gems.github.com'
+
