@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Robin Spainhour"]
-  s.date = %q{2008-12-11}
+  s.date = %q{2008-12-15}
   s.description = %q{HTML stuff I use frequently.}
   s.email = %q{robin@robinspainhour.com}
-  s.extra_rdoc_files = ["lib/robins_html_helpers.rb", "README.rdoc"]
-  s.files = ["Rakefile", "Manifest", "lib/robins_html_helpers.rb", "README.rdoc", "robins_html_helpers.gemspec"]
+  s.extra_rdoc_files = ["tasks/rspec.rake", "lib/robins_html_helpers.rb", "README.rdoc"]
+  s.files = ["spec/spec.opts", "spec/spec_helper.rb", "spec/helpers/helpers_spec.rb", "robins_html_helpers.gemspec", "Rakefile", "Manifest", "tasks/rspec.rake", "lib/robins_html_helpers.rb", "README.rdoc"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/robinsp/robins_html_helpers}
   s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Robins_html_helpers", "--main", "README.rdoc"]
