@@ -16,4 +16,6 @@ end
 plugin_spec_dir = File.dirname(__FILE__)
 ActiveRecord::Base.logger = Logger.new(plugin_spec_dir + "/debug.log")
 
-require File.expand_path(File.dirname(__FILE__) + "/../lib/robins_html_helpers")
+dir = File.expand_path(File.dirname(__FILE__))
+require "#{dir}/../lib/robins_html_helpers"
+require "#{dir}/../lib/robins_html_helpers/form_builder"
