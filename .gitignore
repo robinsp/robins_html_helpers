@@ -1,6 +1,5 @@
 pkg
 doc
-Manifest
 .project
 spec/debug.log
 spec/railsenv/log/**
