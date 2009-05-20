@@ -13,6 +13,5 @@ Install this gem:
 If you want to configure your Rails app to explicitly require this gem, add something
 like this to the config block in environment.rb:
        config.gem 'robinsp-robins_html_helpers', 
-                  :version => '>=0.1.2',
                   :lib => 'robins_html_helpers', 
                   :source => 'http://gems.github.com'

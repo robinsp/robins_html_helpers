@@ -1,27 +1,19 @@
-require 'rubygems'
-
-require 'actionpack'
-require 'action_controller'
+# The minimal Rails project was created to run specs against using:
+# rails -m http://github.com/robinsp/rails_templates/raw/master/minimal.rb railsenv
 
 
-class ApplicationController < ActionController::Base
-  # rspec-rails seems to need this. 
-  # I suppose it triggers a whole lot of loading, but I'm not sure of exactly what...  
+ENV["RAILS_ENV"] = "test"
+require File.expand_path(File.dirname(__FILE__) + "/railsenv/config/environment")
+require 'spec'
+require 'spec/rails'
+
+Spec::Runner.configure do |config|
+  config.use_transactional_fixtures = true
+  config.use_instantiated_fixtures  = false
+  config.mock_with :mocha
 end
 
-require 'action_controller/test_process'
-require 'action_controller/integration'
-require 'active_record/fixtures' if defined?(ActiveRecord::Base)
-require 'test/unit'
-
-require 'spec'
-
-require 'spec/rails/matchers'
-require 'spec/rails/mocks'
-require 'spec/rails/example'
-require 'spec/rails/extensions'
-require 'spec/rails/interop/testcase'
-
+plugin_spec_dir = File.dirname(__FILE__)
+ActiveRecord::Base.logger = Logger.new(plugin_spec_dir + "/debug.log")
 
 require File.expand_path(File.dirname(__FILE__) + "/../lib/robins_html_helpers")
-
