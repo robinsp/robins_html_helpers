@@ -22,12 +22,19 @@ describe RobinsHtmlHelpers::FormBuilder do
     
   end
   
-  [:text_field, :text_area, :password_field].each do |method| 
+  [:text_field, :text_area].each do |method| 
     describe "#{method.to_s}()" do 
       it "should remove label param before delegating to super class" do 
         @mock_template.expects(method).with(@mock_object_name, @expected_attrib, @expected_opts)
         @builder.send method, @expected_attrib, @opts_with_label
       end
+    end
+  end
+  
+  describe "password_field()" do 
+    it "should remove label param before delegating to super class" do 
+      @mock_template.expects(:password_field).with(@mock_object_name, @expected_attrib, @expected_opts)
+      @builder.password_field(@expected_attrib, @opts_with_label)
     end
   end
   
