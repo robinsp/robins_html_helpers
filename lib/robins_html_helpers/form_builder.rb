@@ -8,7 +8,7 @@ module RobinsHtmlHelpers
       raise "No :hint supplied" if hint_class && hint.blank?
 
       result = wrap_field(method, super(method, options), label_text )
-      result << hint_js_tag(the_dom_id, hint, hint_class) unless hint.blank?
+      result << hint_js_tag(the_dom_id, hint, (hint_class || "hinting")) unless hint.blank?
       result
     end
     
@@ -20,7 +20,7 @@ module RobinsHtmlHelpers
       raise "No :hint supplied" if hint_class && hint.blank?
 
       result = wrap_field(method, super(method, options), label_text )
-      result << hint_js_tag(the_dom_id, hint, hint_class) unless hint.blank?
+      result << hint_js_tag(the_dom_id, hint, (hint_class || "hinting")) unless hint.blank?
       result
     end
     

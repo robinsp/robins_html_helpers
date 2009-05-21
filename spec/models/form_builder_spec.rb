@@ -59,7 +59,10 @@ describe RobinsHtmlHelpers::FormBuilder do
           @builder.send(method, @expected_attrib, {:hint => "A hint"}).should == "field-result" + "hint-result"
         end
         
-        it "should default :hint_class to 'hinting' " 
+        it "should default :hint_class to 'hinting' " do 
+          @builder.expects(:hint_js_tag).with("dom_id", "A hint", "hinting").returns("hint-result")
+          @builder.send(method, @expected_attrib, {:id => "dom_id", :hint => "A hint"})
+        end
         
         describe "with DOM id given by the developer" do 
           it "should create the hint JS by supplying an DOM element id, hint and hint_class" do 
