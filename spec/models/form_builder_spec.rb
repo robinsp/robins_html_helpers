@@ -20,14 +20,22 @@ describe RobinsHtmlHelpers::FormBuilder do
     
   end
   
+  [:text_field, :text_area, :password_field].each do |method| 
+    describe "#{method.to_s}()" do 
+      it "should remove label param before delegating to super class" do 
+        expected_opts = {:object => @mock_the_object, :opt => "val" }
+        opts_with_label = {:opt => "val", :label => "thelabel"}
+        
+        @mock_template.expects(method).with(@mock_object_name, @expected_attrib, expected_opts)
+        @builder.send method, @expected_attrib, opts_with_label
+      end
+    end
+  end
+  
+  
   it "should remove label param before delegating to super" do 
     expected_opts = {:object => @mock_the_object, :opt => "val" }
     opts_with_label = {:opt => "val", :label => "thelabel"}
-    
-    [:text_field, :text_area, :password_field].each do |method| 
-      @mock_template.expects(method).with(@mock_object_name, @expected_attrib, expected_opts)
-      @builder.send method, @expected_attrib, opts_with_label
-    end
     
     @mock_template.expects(:date_select).with(@mock_object_name, @expected_attrib, expected_opts, {})
     @builder.send :date_select, @expected_attrib, opts_with_label
