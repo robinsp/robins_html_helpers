@@ -7,7 +7,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('robins_html_helpers', '0.1.3') do |p|
+Echoe.new('robins_html_helpers', '0.2.0') do |p|
   p.description    = "HTML stuff I use frequently."
   p.url            = "http://github.com/robinsp/robins_html_helpers"
   p.author         = "Robin Spainhour"

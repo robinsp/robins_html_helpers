@@ -1,3 +1,7 @@
+rails_generators/robins_html_helpers_resources/USAGE
+rails_generators/robins_html_helpers_resources/templates/robins_html_helpers.css
+rails_generators/robins_html_helpers_resources/templates/robins_html_helpers.js
+rails_generators/robins_html_helpers_resources/robins_html_helpers_resources_generator.rb
 spec/railsenv/config/routes.rb
 spec/railsenv/config/environments/production.rb
 spec/railsenv/config/environments/test.rb
@@ -13,6 +17,7 @@ spec/railsenv/config/boot.rb
 spec/railsenv/config/locales/en.yml
 spec/railsenv/db/test.sqlite3
 spec/railsenv/app/controllers/application_controller.rb
+spec/models/form_builder_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 spec/helpers/helpers_spec.rb
@@ -20,5 +25,6 @@ robins_html_helpers.gemspec
 Rakefile
 Manifest
 tasks/rspec.rake
+lib/robins_html_helpers/form_builder.rb
 lib/robins_html_helpers.rb
 README.rdoc
