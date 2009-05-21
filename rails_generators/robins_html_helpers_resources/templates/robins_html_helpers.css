@@ -1,0 +1,6 @@
+
+/* Example style for form field hints */
+input.hinting, 
+textarea.hinting {
+	font-style: italic;
+}
