@@ -24,12 +24,23 @@ describe RobinsHtmlHelpers::FormBuilder do
     
   end
   
-  [:text_field, :text_area, :password_field, :date_select, :select, :check_box].each do |method|
+  [:text_field, :text_area, :password_field, :date_select, :check_box].each do |method|
     describe "#{method.to_s}()" do 
-      it "should wrap_field"
+      it "should wrap_field" do 
+        @mock_template.expects(method)
+        @builder.expects(:wrap_field)
+        @builder.send(method, @expected_attrib)
+      end
     end
   end
   
+  describe "select()" do 
+    it "should wrap_field" do 
+      @mock_template.expects(:select)
+      @builder.expects(:wrap_field)
+      @builder.select(@expected_attrib, {} )
+    end
+  end
   
   [:text_field, :text_area].each do |method| 
     describe "#{method.to_s}()" do 
@@ -51,7 +62,7 @@ describe RobinsHtmlHelpers::FormBuilder do
         end
         
         it "should not allow :hint_class option without a :hint option" do 
-          lambda { @builder.send(method, @expected_attrib, {:hint_class => "CSS_class"}) }.should  raise_error "No :hint supplied"
+          lambda { @builder.send(method, @expected_attrib, {:hint_class => "CSS_class"}) }.should  raise_error("No :hint supplied")
         end 
         
         it "should append hint JS" do 

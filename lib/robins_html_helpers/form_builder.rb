@@ -50,7 +50,7 @@ module RobinsHtmlHelpers
       wrap_field(method, super(method, choices, options, html_options), label_text )
     end
   
-    private 
+    private
     def wrap_field(method, form_field, label_text)
       "<div class=\"custom_form_field\">#{label(method, label_text )} #{ form_field }</div>"
     end
