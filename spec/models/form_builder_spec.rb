@@ -34,21 +34,21 @@ describe RobinsHtmlHelpers::FormBuilder do
   describe "date_select()" do 
     it "should remove label param before delegating to super class" do 
       @mock_template.expects(:date_select).with(@mock_object_name, @expected_attrib, @expected_opts, {})
-      @builder.send :date_select, @expected_attrib, @opts_with_label  
+      @builder.date_select(@expected_attrib, @opts_with_label)
     end
   end
   
   describe "select()" do 
     it "should remove label param before delegating to super class" do 
       @mock_template.expects(:select).with(@mock_object_name, @expected_attrib, {}, {:object => @mock_the_object}, {:opt => "val" })
-      @builder.send :select, @expected_attrib, {}, {}, @opts_with_label  
+      @builder.select( @expected_attrib, {}, {}, @opts_with_label )
     end
   end
   
   describe "check_box()" do 
     it "should remove label param before delegating to super class" do 
       @mock_template.expects(:check_box).with(@mock_object_name, @expected_attrib, @expected_opts, 1.to_s, 0.to_s)
-      @builder.send :check_box, @expected_attrib, @opts_with_label  
+      @builder.check_box( @expected_attrib, @opts_with_label )
     end
   end
 
