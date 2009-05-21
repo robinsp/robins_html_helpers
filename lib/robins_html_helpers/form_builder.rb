@@ -24,8 +24,10 @@ module RobinsHtmlHelpers
       result
     end
     
-    def hint_js_tag(a,b,c)
-      ""
+    def hint_js_tag(element_id, hint, hint_class)
+      raise "Missing arg" if element_id.blank? || hint.blank? || hint_class.blank?
+      script = "new RobinsHtmlHelpers.FormFieldHint('#{element_id}', '#{hint}', '#{hint_class}');"
+      @template.javascript_tag(script)
     end
     
     def password_field(method, options = {}) 

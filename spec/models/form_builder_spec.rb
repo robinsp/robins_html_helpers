@@ -6,6 +6,8 @@ describe RobinsHtmlHelpers::FormBuilder do
     @expected_attrib = :the_attrib
     
     @mock_template = mock("the-template")
+    @mock_template.stubs(:javascript_tag).returns("")
+    
     @mock_object_name = 'object-name'
     @mock_the_object = mock('the-object')
     
@@ -103,6 +105,24 @@ describe RobinsHtmlHelpers::FormBuilder do
       @mock_template.expects(:check_box).with(@mock_object_name, @expected_attrib, @expected_opts, 1.to_s, 0.to_s)
       @builder.check_box( @expected_attrib, @opts_with_label )
     end
+  end
+  
+  describe "hint_js_tag()" do 
+    it "should call javascript_tag" do 
+      element_id, hint, hint_class = "element_id", "hint", "hint_class"
+      js_script = "new RobinsHtmlHelpers.FormFieldHint('#{element_id}', '#{hint}', '#{hint_class}');"
+      @mock_template.expects(:javascript_tag).with(js_script)
+      @builder.hint_js_tag(element_id, hint, hint_class)
+    end
+    
+    it "should fail is any argument is blank" do 
+      element_id, hint, hint_class = "element_id", "hint", "hint_class"
+      
+      lambda {@builder.hint_js_tag("", hint, hint_class)}.should raise_error("Missing arg")
+      lambda {@builder.hint_js_tag(element_id, "", hint_class)}.should raise_error("Missing arg")
+      lambda {@builder.hint_js_tag(element_id, hint, "")}.should raise_error("Missing arg")
+    end
+    
   end
 
 end
