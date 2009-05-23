@@ -1,8 +1,27 @@
 module RobinsHtmlHelpers 
+  
+  # Customized form builder that inserts an HTML label tag before the form 
+  # fields and wraps the +label+ and input elements in an enclosing div tag.
+  # The enclosing +div+ has class +custom_form_field+ by default.
+  #
+  #--
+  #    <% form_for( @item, :builder => RobinsHtmlHelpers::FormBuilder) do |f| %>
+  #      <%= f.text_field :name %>
+  #    <%end%>
+  #
+  #    <div class="custom_form_field">
+  #        <label for="item_name">Name</label> 
+  #        <input type="text" value="Get filofax pen from anders/mf" size="30" name="item[name]" id="item_name"/>
+  #    </div>
+  #
+  #++
+  #
+  # For text_field and text_area a hint options can be passed to set default
+  # text using javascript. (This requires that you have included the javascript
+  # and css files that come with this gem. Refer to the README file for 
+  # instructions.)
   class FormBuilder < ActionView::Helpers::FormBuilder
-    
-    # nodoc
-    class HintOptions
+    class HintOptions #:nodoc:
       attr_reader :hint, :hint_class
       
       def initialize(hint, hint_class)
