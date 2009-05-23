@@ -1,6 +1,7 @@
 module RobinsHtmlHelpers 
   class FormBuilder < ActionView::Helpers::FormBuilder
     
+    # nodoc
     class HintOptions
       attr_reader :hint, :hint_class
       
@@ -20,29 +21,15 @@ module RobinsHtmlHelpers
     end
     
     def text_field(method, options = {}) 
-      label_text = options.delete(:label)
-      hint_options = HintOptions.new(options.delete(:hint), options.delete(:hint_class))
-
-      result = wrap_field(method, super(method, options), label_text )
-      
-      if hint_options.enabled?
-        result << @template.javascript_tag( hint_options.to_js( get_dom_id_from(options, method) ) )
+      text_input_field(method, options) do 
+        super(method, options)
       end
-      
-      result
     end
     
     def text_area(method, options = {}) 
-      label_text = options.delete(:label)
-      hint_options = HintOptions.new(options.delete(:hint), options.delete(:hint_class))
-
-      result = wrap_field(method, super(method, options), label_text )
-
-      if hint_options.enabled?
-        result << @template.javascript_tag( hint_options.to_js( get_dom_id_from(options, method) ) )
+      text_input_field(method, options) do 
+        super(method, options)
       end
-      
-      result
     end
         
     def password_field(method, options = {}) 
@@ -72,6 +59,19 @@ module RobinsHtmlHelpers
     
     def get_dom_id_from(options, method)
       return options[:id] || object_name + "_" + method.to_s
+    end
+    
+    def text_input_field(method, options = {})
+      label_text = options.delete(:label)
+      hint_options = HintOptions.new(options.delete(:hint), options.delete(:hint_class))
+
+      result = wrap_field(method, yield, label_text )
+      
+      if hint_options.enabled?
+        result << @template.javascript_tag( hint_options.to_js( get_dom_id_from(options, method) ) )
+      end
+      
+      result
     end
   end
   
