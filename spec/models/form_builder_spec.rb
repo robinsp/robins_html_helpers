@@ -21,7 +21,6 @@ describe RobinsHtmlHelpers::FormBuilder do
     
     @expected_opts = {:object => @mock_the_object, :opt => "val" }
     @opts_with_label = {:opt => "val", :label => "thelabel" }
-    
   end
   
   [:text_field, :text_area, :password_field, :date_select, :check_box].each do |method|
@@ -44,51 +43,54 @@ describe RobinsHtmlHelpers::FormBuilder do
   
   [:text_field, :text_area].each do |method| 
     describe "#{method.to_s}()" do 
+      before do 
+        @mock_template.stubs(method)
+        @hint_options_class = RobinsHtmlHelpers::FormBuilder::HintOptions
+        @hint_options_stub = @hint_options_class.new("Hint", "HintClass")
+        @hint_options_stub.stubs(:enabled?).returns(false)
+        @hint_options_class.stubs(:new).returns(@hint_options_stub)        
+      end
+      
       it "should remove :label param before delegating to super class" do 
         @mock_template.expects(method).with(@mock_object_name, @expected_attrib, @expected_opts)
         @builder.send method, @expected_attrib, @opts_with_label
       end
       
+      it "should remove :hint and :hint_class options before delegating to super class" do 
+        @mock_template.expects(method).with(@mock_object_name, @expected_attrib, @expected_opts)
+        @builder.send method, @expected_attrib, {:opt => "val", :hint => "A hint", :hint_class => "CSS_class"}
+      end
       
-      describe "with hints" do 
+      it "should create HintOptions object" do 
+        @hint_options_class.expects(:new).with("A hint", "CSS_class").returns(@hint_options_stub)
+        @builder.send method, @expected_attrib, {:opt => "val", :hint => "A hint", :hint_class => "CSS_class"}
+      end
+      
+      describe "with valid hint options" do 
         before do 
-          @mock_template.stubs(method)
           @builder.stubs(:wrap_field).returns("field-result")
+          @hint_options_stub.stubs(:enabled?).returns(true)
         end
         
-        it "should remove :hint and :hint_class options before delegating to super class" do 
-          @mock_template.expects(method).with(@mock_object_name, @expected_attrib, @expected_opts)
-          @builder.send method, @expected_attrib, {:opt => "val", :hint => "A hint", :hint_class => "CSS_class"}
-        end
-        
-        it "should not allow :hint_class option without a :hint option" do 
-          lambda { @builder.send(method, @expected_attrib, {:hint_class => "CSS_class"}) }.should  raise_error("No :hint supplied")
-        end 
-        
-        it "should append hint JS" do 
-          @builder.expects(:hint_js_tag).returns("hint-result")
-          @builder.send(method, @expected_attrib, {:hint => "A hint"}).should == "field-result" + "hint-result"
-        end
-        
-        it "should default :hint_class to 'hinting' " do 
-          @builder.expects(:hint_js_tag).with("dom_id", "A hint", "hinting").returns("hint-result")
-          @builder.send(method, @expected_attrib, {:id => "dom_id", :hint => "A hint"})
-        end
-        
-        describe "with DOM id given by the developer" do 
-          it "should create the hint JS by supplying an DOM element id, hint and hint_class" do 
-            @builder.expects(:hint_js_tag).with("element_id", "A hint", "hint_class").returns("hint-result")
+        describe "and DOM id given by the developer" do 
+          it "should create Javascript by supplying an DOM element id" do 
+            @hint_options_stub.expects(:to_js).with("element_id")
             @builder.send method, @expected_attrib, {:id => "element_id", :hint => "A hint", :hint_class => "hint_class"}
           end
         end
         
         describe "When the DOM id is set by default" do 
           it "should create the hint JS by supplying an DOM element id, hint and hint_class" do 
-            @builder.expects(:hint_js_tag).with("#{@mock_object_name}_#{@expected_attrib.to_s}", "A hint", "hint_class").returns("hint-result")
+            @hint_options_stub.expects(:to_js).with("#{@mock_object_name}_#{@expected_attrib.to_s}")
             @builder.send method, @expected_attrib, {:hint => "A hint", :hint_class => "hint_class"}
           end
         end
         
+        it "should wrap the result of to_js() using javascript_tag helper and append it" do
+          @hint_options_stub.expects(:to_js).returns("pure-js")
+          @mock_template.expects(:javascript_tag).with("pure-js").returns("hint-result")
+          @builder.send(method, @expected_attrib).should == "field-result" + "hint-result"
+        end
       end 
     end
   end
@@ -120,23 +122,4 @@ describe RobinsHtmlHelpers::FormBuilder do
       @builder.check_box( @expected_attrib, @opts_with_label )
     end
   end
-  
-  describe "hint_js_tag()" do 
-    it "should call javascript_tag" do 
-      element_id, hint, hint_class = "element_id", "hint", "hint_class"
-      js_script = "new RobinsHtmlHelpers.FormFieldHint('#{element_id}', '#{hint}', '#{hint_class}');"
-      @mock_template.expects(:javascript_tag).with(js_script)
-      @builder.hint_js_tag(element_id, hint, hint_class)
-    end
-    
-    it "should fail is any argument is blank" do 
-      element_id, hint, hint_class = "element_id", "hint", "hint_class"
-      
-      lambda {@builder.hint_js_tag("", hint, hint_class)}.should raise_error("Missing arg")
-      lambda {@builder.hint_js_tag(element_id, "", hint_class)}.should raise_error("Missing arg")
-      lambda {@builder.hint_js_tag(element_id, hint, "")}.should raise_error("Missing arg")
-    end
-    
-  end
-
 end
