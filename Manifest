@@ -1,3 +1,7 @@
+rails_generators/robins_layout/USAGE
+rails_generators/robins_layout/templates/layout.css
+rails_generators/robins_layout/templates/application.html.erb
+rails_generators/robins_layout/robins_layout_generator.rb
 rails_generators/robins_html_helpers_resources/USAGE
 rails_generators/robins_html_helpers_resources/templates/robins_html_helpers.css
 rails_generators/robins_html_helpers_resources/templates/robins_html_helpers.js
@@ -21,7 +25,6 @@ spec/models/form_builder_spec.rb
 spec/spec.opts
 spec/spec_helper.rb
 spec/helpers/helpers_spec.rb
-robins_html_helpers.gemspec
 Rakefile
 Manifest
 tasks/rspec.rake
