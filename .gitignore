@@ -1,6 +1,7 @@
 pkg
 doc
 .project
+.loadpath
 spec/debug.log
 spec/railsenv/log/**
 
